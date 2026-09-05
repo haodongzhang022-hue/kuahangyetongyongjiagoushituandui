@@ -1,0 +1,16 @@
+# 跨行业通用架构师团队 · 汇总仓流水线
+# push 时校验文档仓库完整性：registry JSON 可解析、README 存在
+main:
+  push:
+    - docker:
+        image: node:20
+      stages:
+        - node -e "const fs=require('fs');const files=['registry/industry-registry-0903.json','registry/hybrid-registry-0903.json'];for(const f of files){JSON.parse(fs.readFileSync(f,'utf8'));console.log('OK '+f);}"
+        - test -f README.md && echo "README OK"
+        - test -f docs/ROUTING_LAYER_0903.md && test -f docs/HYBRID_ROLES_0903.md && echo "docs OK"
+$
+  vscode:
+    - docker:
+        image: node:20
+      services: [vscode]
+      stages: [node -v]

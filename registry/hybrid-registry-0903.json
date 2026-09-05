@@ -1,0 +1,93 @@
+{
+  "mode": "architect-common-team-0903",
+  "schema_version": "0903.0",
+  "concept": "跨行业角色层：一个角色同时掌握两个及以上行业领域知识（混合型人才），跨域支援、减少专职空转，对应现实中的复合型人才",
+  "registration": {
+    "key": "roster/hybrid/<角色名>",
+    "tags": [
+      "0903",
+      "roster",
+      "hybrid"
+    ],
+    "value": {
+      "session_id": "<session id>",
+      "capabilities": [
+        "<industry id>",
+        "..."
+      ],
+      "proficiency": {
+        "<industry id>": "主力 | 熟练 | 了解"
+      }
+    },
+    "mutate": "能力增删 = 覆盖同一 key（新增代替修改）",
+    "cross_link": "混合注册须同时在各能力域 roster/industry/<id> 下关联本会话"
+  },
+  "resolution_order": [
+    "① 该域专职角色 roster/role/<域>·X 或 roster/industry/<id>",
+    "② hybrid 注册表：capabilities 覆盖任务所需行业集 且 熟练度 ≥ 熟练",
+    "③ generic 主干角色兜底"
+  ],
+  "tie_break": [
+    "工作负载低优先",
+    "就近（同会话/同工作区）优先",
+    "领域包 recommended_hybrids 声明优先"
+  ],
+  "discipline": [
+    "承接某域任务 = 进入该域管线，遵守该域领域包全部规则（事实源/门禁），不得用另一域习惯顶替",
+    "一次任务只属一个主域（接力卡 industry 字段唯一）；门禁按任务所属域执行，副域知识仅作借鉴",
+    "多域规则冲突 → 显式上报（接力卡 note + 总师/人类拍板），禁止私自取舍",
+    "混合角色产出走该域 Issue/PR 主干与门禁，留痕署名 @混合·<角色名> 或 <域>·X"
+  ],
+  "seed_hybrids": [
+    {
+      "id": "finance+software",
+      "label": "量化工程型",
+      "capabilities": [
+        "finance",
+        "software"
+      ],
+      "why": "量化系统 = 金融知识 + 软件工程；0901 实战必需",
+      "status": "recommended"
+    },
+    {
+      "id": "software+game",
+      "label": "引擎工程型",
+      "capabilities": [
+        "software",
+        "game"
+      ],
+      "why": "游戏工程 = 客户端架构 + 玩法系统实现",
+      "status": "recommended"
+    },
+    {
+      "id": "game+video",
+      "label": "内容管线型",
+      "capabilities": [
+        "game",
+        "video"
+      ],
+      "why": "游戏演出/过场/宣传 = 影视语言",
+      "status": "candidate"
+    },
+    {
+      "id": "novel+video",
+      "label": "叙事创作型",
+      "capabilities": [
+        "novel",
+        "video"
+      ],
+      "why": "脚本创作 = 叙事结构 + 影视语言",
+      "status": "candidate"
+    },
+    {
+      "id": "novel+game",
+      "label": "世界观文案型",
+      "capabilities": [
+        "novel",
+        "game"
+      ],
+      "why": "游戏剧情/世界观/角色文案",
+      "status": "candidate"
+    }
+  ]
+}

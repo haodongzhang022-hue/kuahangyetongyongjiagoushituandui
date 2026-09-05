@@ -1,0 +1,217 @@
+{
+  "mode": "architect-common-team-0903",
+  "schema_version": "0903.0",
+  "trunk_ref": "preset architect-common-team-0903（主干继承 architect-common-team-0831；新增代替修改，0831/0901 不动）",
+  "router": {
+    "default_industry": "generic",
+    "resolution_order": [
+      "user_explicit",
+      "at_domain_role",
+      "keywords_hit",
+      "generic_fallback"
+    ],
+    "multi_hit": "取第一命中 + 接力卡 note 标注命中歧义供确认",
+    "card_fields": [
+      "industry",
+      "architect_type",
+      "capabilities_required"
+    ]
+  },
+  "industries": [
+    {
+      "id": "generic",
+      "name": "通用（主干兜底）",
+      "status": "landed",
+      "role_namespace": "架构·",
+      "keywords": [
+        "通用",
+        "默认",
+        "未分类",
+        "其他"
+      ],
+      "domain_package": null,
+      "gate_group": "trunk（评审 disposition / 测试信号灯 / 交付确认）",
+      "preset_ref": "architect-common-team-0903",
+      "recommended_hybrids": [],
+      "notes": "永存兜底，不可退役；路由未命中的全部任务落此。"
+    },
+    {
+      "id": "finance",
+      "name": "金融 / 量化",
+      "status": "landed",
+      "role_namespace": "量化·",
+      "keywords": [
+        "金融",
+        "量化",
+        "股票",
+        "期货",
+        "期权",
+        "因子",
+        "回测",
+        "风控",
+        "行情",
+        "资金",
+        "投资",
+        "策略",
+        "净值",
+        "持仓",
+        "下单",
+        "交易"
+      ],
+      "domain_package": "quant-finance-team-0901 领域包（六层分层 L0-L5 / 31 角色 / G1-G7 门禁 / DuckDB 双盘事实库铁律 / 发布管道）",
+      "gate_group": "G1 数据真实 / G2 单因子 / G3 融合因子 / G4 模型 / G5 回测 / G6 风控 / G7 发布",
+      "preset_ref": "quant-finance-team-0901",
+      "recommended_hybrids": [
+        "finance+software"
+      ],
+      "notes": "本体系第一个行业化落地（0901，omni-meta 已闭环 RC-000076）。"
+    },
+    {
+      "id": "game",
+      "name": "游戏",
+      "status": "seed",
+      "role_namespace": "游戏·",
+      "keywords": [
+        "游戏",
+        "玩法",
+        "关卡",
+        "数值",
+        "养成",
+        "抽卡",
+        "战斗",
+        "手感",
+        "Unity",
+        "UE",
+        "Cocos",
+        "小游戏",
+        "氪金",
+        "留存",
+        "DAU",
+        "DDA",
+        "副本",
+        "局内"
+      ],
+      "domain_package": "domains/game/（待建：knowledge.md / pipeline.md / gates.md / roles.md）",
+      "gate_group": "game 门禁组（待建：核心循环完整 → 数值平衡 → 性能预算 → 合规发布）",
+      "preset_ref": null,
+      "recommended_hybrids": [
+        "game+video",
+        "software+game"
+      ],
+      "notes": "建议首建领域包内容：核心玩法循环 / 数值架构 / 增量资源管线 / 性能预算 / 多端发布。"
+    },
+    {
+      "id": "video",
+      "name": "视频创作",
+      "status": "seed",
+      "role_namespace": "视频·",
+      "keywords": [
+        "视频",
+        "短视频",
+        "剪辑",
+        "分镜",
+        "脚本",
+        "运镜",
+        "调色",
+        "声音",
+        "字幕",
+        "BGM",
+        "口播",
+        "影视",
+        "导演",
+        "后期",
+        "卡点"
+      ],
+      "domain_package": "domains/video/（待建：knowledge.md / pipeline.md / gates.md / roles.md）",
+      "gate_group": "video 门禁组（待建：脚本完整 → 成片一致 → 音量/字幕合规 → 平台规范）",
+      "preset_ref": null,
+      "recommended_hybrids": [
+        "video+novel",
+        "game+video"
+      ],
+      "notes": "内容创作向；与 novel 大量共通（叙事结构），领域包可互相引用。"
+    },
+    {
+      "id": "novel",
+      "name": "小说创作",
+      "status": "seed",
+      "role_namespace": "小说·",
+      "keywords": [
+        "小说",
+        "网文",
+        "世界观",
+        "大纲",
+        "人物设定",
+        "章节",
+        "文风",
+        "连载",
+        "起承转合",
+        "爽点",
+        "伏笔",
+        "番外",
+        "开篇"
+      ],
+      "domain_package": "domains/novel/（待建：knowledge.md / pipeline.md / gates.md / roles.md）",
+      "gate_group": "novel 门禁组（待建：世界观一致性 → 人物行动逻辑 → 章节节奏 → 连载发布）",
+      "preset_ref": null,
+      "recommended_hybrids": [
+        "novel+video",
+        "novel+game"
+      ],
+      "notes": "文本向；注意与 software 的工程方法差异（叙事逻辑 ≠ 代码逻辑）。"
+    },
+    {
+      "id": "software",
+      "name": "软件开发",
+      "status": "landed",
+      "role_namespace": "架构·（主干母域）",
+      "keywords": [
+        "软件开发",
+        "代码",
+        "接口",
+        "bug",
+        "PR",
+        "提测",
+        "部署",
+        "重构",
+        "SDK",
+        "API",
+        "数据库",
+        "需求开发",
+        "模块"
+      ],
+      "domain_package": "主干即母域（架构八步 / dev-standard 强约束 / 评审 disposition / 测试信号灯 / 交付收尾）",
+      "gate_group": "主干门禁（dev-standard L1 + 评审 merge/proceed/fix_bug + 测试信号灯 + CP3 合并确认）",
+      "preset_ref": "dongjiagoushi-team + architect-common-team-0903",
+      "recommended_hybrids": [
+        "software+finance",
+        "software+game"
+      ],
+      "notes": "通用架构师的 home turf —— 通用主干角色 架构·X 直接承接；其余行业 = 主干 + 领域差异。"
+    }
+  ],
+  "extension_protocol": {
+    "trigger": [
+      "路由多次未命中",
+      "用户提出新行业",
+      "领域包评审上提"
+    ],
+    "steps": [
+      "先用 generic 兜底跑通，任务不断链",
+      "建领域包 domains/<id>/（可先极简一页）",
+      "industry-registry-0903.json 追加新 id（只追加，绝不修改旧条目）",
+      "memory 登记 roster/industry/<id>",
+      "端到端验证（路由→接力→门禁→交付）通过后 status 置 landed"
+    ],
+    "rule": "append-only（新增代替修改）：禁止为满足新需求改写旧类型条目"
+  },
+  "availability": {
+    "generic_never_retire": true,
+    "fallback_chain": [
+      "领域专职角色",
+      "hybrid 混合角色",
+      "generic 通用兜底"
+    ],
+    "degrade_rule": "降级必须留痕（接力卡 note）；主干与领域包隔离演进，版本各自独立"
+  }
+}
